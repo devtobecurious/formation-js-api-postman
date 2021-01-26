@@ -1,0 +1,13 @@
+{
+  "name": "exemple-projet-gitlab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run formation-postman.postman_collection.json -e FormationPostMan.001.Dev.postman_environment.json -k -r cli,json,junit",
+    "test:staging": "newman run formation-postman.postman_collection.json -e FormationPostMan.001.Staging.postman_environment.json -k -r cli,json,junit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "61d4bbf7-0a40-4f3d-8852-c13f76190f83",
+		"name": "formation-postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PremierTestRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const wookie = pm.response.json();\r",
+							"\r",
+							"const maKey = pm.variables.get('key');\r",
+							"\r",
+							"\r",
+							"const maFonctionTestStatusCode = () =>  {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}\r",
+							"\r",
+							"pm.test(\"should be status code with 200 \", maFonctionTestStatusCode);\r",
+							"\r",
+							"pm.test('should be wookie not null ', () => {\r",
+							"    pm.expect(wookie).not.be.null;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"const Ajv = require('ajv');\r",
+							"const ajv = new Ajv({ logger: console, allErrors: true });\r",
+							"\r",
+							"const schema = {\r",
+							"    type: \"object\",\r",
+							"    required: [\r",
+							"        \"id\",\r",
+							"        \"size\"\r",
+							"    ],\r",
+							"    properties: {\r",
+							"        id: {\r",
+							"            type: \"number\"\r",
+							"        },\r",
+							"        surname: {\r",
+							"            type: \"string\"\r",
+							"        }\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.test('should be really a wooky (wookie schema)', () => {\r",
+							"    pm.expect(ajv.validate(schema, wookie)).to.be.true;\r",
+							"\r",
+							"});\r",
+							"\r",
+							"//pm.globals.unset('value');\r",
+							"//pm.collectionVariables.unset('maVariable1');\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set('key', 12);\r",
+							"pm.globals.set('value', 'test wookie final');\r",
+							"const value = pm.globals.get('value');\r",
+							"\r",
+							"pm.collectionVariables.set('maVariable1', 15);\r",
+							"const valeurVariable = pm.collectionVariables.get('maVariable1');\r",
+							"\r",
+							"pm.environment.set('key', 150);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/wookie/:id?key={{key}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"wookie",
+						":id"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "18"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PremierTestRequest-norun",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/wookie/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"wookie",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'none'"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "146"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 21 Jan 2021 14:13:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Cannot GET /wookie/</pre>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "https://trello.com/1/cards",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "trello.com"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\""
+					},
+					{
+						"key": "x-trello-client-version",
+						"value": "build-6749"
+					},
+					{
+						"key": "x-trello-traceid",
+						"value": "60080855446665de5ad9427e9508235f"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/javascript, */*; q=0.01"
+					},
+					{
+						"key": "x-requested-with",
+						"value": "XMLHttpRequest"
+					},
+					{
+						"key": "origin",
+						"value": "https://trello.com"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "referer",
+						"value": "https://trello.com/b/tmFPM4yC/livres-%C3%A0-lire"
+					},
+					{
+						"key": "accept-language",
+						"value": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"
+					},
+					{
+						"key": "cookie",
+						"value": "_ga=GA1.2.1659817283.1604910157; ajs_group_id=null; ajs_anonymous_id=%22c1ef5501-15b1-4982-aa30-871aaedfa966%22; _gcl_au=1.1.1737630889.1604910158; gdpr-user=true; _mkto_trk=id:594-ATC-127&token:_mch-trello.com-1604910158029-14278; gdpr-cookie-consent=accepted; tss=1; token=5894769d465d91a58b877a65%2F2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm; __cid=a4ef6d89-6054-4de9-afb3-66072e1e13bf-731b701bbdf916f2ff3b3568ff3b35b2ff3b0d; G_ENABLED_IDPS=google; __hstc=183819321.40d01dbb179d848f96cf831309a22fea.1606984271103.1606984271103.1606984271103.1; __hssrc=1; hubspotutk=40d01dbb179d848f96cf831309a22fea; loggedIn=1; lang=fr-FR; dsc=308d9b032aa2bf35af234df3f9544d868e684843092f5041268f96a8a34c680a; _gid=GA1.2.1316817017.1610977996; _sp_ses.dc4d=*; mab=5894769d465d91a58b877a65; _sp_id.dc4d=80954590-9e0c-4a06-80f8-aed57c2a6412.1604910158.198.1611139135.1611070755.9103f1a2-fc5f-43b7-ab79-4734fb8e58d8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"une nouvelle carte\",\"closed\":false,\"idLabels\":[],\"idMembers\":[],\"dateLastActivity\":1611139157712,\"pos\":65535,\"idBoard\":\"59772655795d32449fdcb7a8\",\"idList\":\"59776a0d49f85c4c0137ca88\",\"token\":\"5894769d465d91a58b877a65/2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm\"}"
+				},
+				"url": {
+					"raw": "https://trello.com/1/cards",
+					"protocol": "https",
+					"host": [
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test login - with success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const user = pm.response.json();\r",
+							"\r",
+							"pm.test('should be success with login and password set', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    pm.expect(user).not.to.be.null;\r",
+							"    pm.expect(user.token).not.to.be.null;\r",
+							"    pm.expect(user.token).not.be.eq('');\r",
+							"\r",
+							"    pm.environment.set('token', user.token);\r",
+							"    postman.setNextRequest('Test selfies with bearer token valid - with success');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"contact@devtobecurious.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/authenticate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"authenticate"
+					]
+				},
+				"description": "Test login user, and getting token from logged success"
+			},
+			"response": []
+		},
+		{
+			"name": "Test selfies with bearer token valid - with success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const selfies = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							" pm.test('should get list of selfies, with success', () => {\r",
+							"     pm.expect(selfies).not.to.be.null;\r",
+							"     pm.expect(selfies).to.be.an('array').that.not.is.empty;\r",
+							"     pm.expect(selfies.length).eq(2);\r",
+							" });\r",
+							"\r",
+							"pm.environment.unset('token');"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const isTokenSet = pm.variables.has('token');\r",
+							"\r",
+							"if (! isTokenSet) {\r",
+							"    throw new EvalError('token is empty');\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/selfies?token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"selfies"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "maVariable1",
+			"value": ""
+		}
+	]
+}

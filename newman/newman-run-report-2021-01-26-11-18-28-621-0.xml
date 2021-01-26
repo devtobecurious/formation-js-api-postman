@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="formation-postman" tests="4" time="0.383">
+  <testsuite name="PremierTestRequest" id="409b1d34-d8ee-49fd-a96a-a904364ce128" timestamp="2021-01-26T11:18:28.081Z" tests="0" failures="0" errors="1" time="0.051">
+    <system-err><![CDATA[Iteration: 0
+
+---
+testScriptError: No data, empty input at 1:1
+
+^
+---
+]]></system-err>
+  </testsuite>
+  <testsuite name="https://trello.com/1/cards" id="f2589532-02f9-49f5-9530-c0458820b73d" timestamp="2021-01-26T11:18:28.081Z" tests="0" failures="0" errors="0" time="0.322"/>
+  <testsuite name="Test login - with success" id="52acd025-2362-498c-9cce-6a654910d5c3" timestamp="2021-01-26T11:18:28.081Z" tests="1" failures="0" errors="0" time="0.005">
+    <testcase name="should be success with login and password set" time="0.005" classname="FormationPostman"/>
+  </testsuite>
+  <testsuite name="Test selfies with bearer token valid - with success" id="08f3b984-f54e-4e9c-acfe-b71f62acff3c" timestamp="2021-01-26T11:18:28.081Z" tests="2" failures="0" errors="0" time="0.005">
+    <testcase name="Status code is 200" time="0.005" classname="FormationPostman"/>
+    <testcase name="should get list of selfies, with success" time="0.005" classname="FormationPostman"/>
+  </testsuite>
+</testsuites>

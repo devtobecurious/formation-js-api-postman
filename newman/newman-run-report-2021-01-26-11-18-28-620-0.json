@@ -1,0 +1,3606 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "61d4bbf7-0a40-4f3d-8852-c13f76190f83"
+    },
+    "item": [
+      {
+        "id": "409b1d34-d8ee-49fd-a96a-a904364ce128",
+        "name": "PremierTestRequest",
+        "request": {
+          "url": {
+            "path": [
+              "wookie",
+              ":id"
+            ],
+            "host": [
+              "{{url}}"
+            ],
+            "query": [
+              {
+                "disabled": true,
+                "key": "value",
+                "value": "1"
+              },
+              {
+                "key": "key",
+                "value": "{{key}}"
+              }
+            ],
+            "variable": [
+              {
+                "type": "any",
+                "value": "18",
+                "key": "id"
+              }
+            ]
+          },
+          "method": "GET",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [
+          {
+            "_": {
+              "postman_previewlanguage": "html"
+            },
+            "id": "6d618b93-ad54-4cc4-a896-41f62fbb00e0",
+            "name": "PremierTestRequest-norun",
+            "originalRequest": {
+              "url": {
+                "protocol": "http",
+                "port": "3000",
+                "path": [
+                  "wookie",
+                  "{{id}}"
+                ],
+                "host": [
+                  "localhost"
+                ],
+                "query": [
+                  {
+                    "disabled": true,
+                    "key": "value",
+                    "value": "1"
+                  }
+                ],
+                "variable": []
+              },
+              "method": "GET",
+              "body": {
+                "mode": "raw",
+                "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            },
+            "status": "Not Found",
+            "code": 404,
+            "header": [
+              {
+                "key": "X-Powered-By",
+                "value": "Express"
+              },
+              {
+                "key": "Content-Security-Policy",
+                "value": "default-src 'none'"
+              },
+              {
+                "key": "X-Content-Type-Options",
+                "value": "nosniff"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              },
+              {
+                "key": "Content-Length",
+                "value": "146"
+              },
+              {
+                "key": "Date",
+                "value": "Thu, 21 Jan 2021 14:13:43 GMT"
+              },
+              {
+                "key": "Connection",
+                "value": "keep-alive"
+              },
+              {
+                "key": "Keep-Alive",
+                "value": "timeout=5"
+              }
+            ],
+            "body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Cannot GET /wookie/</pre>\n    </body>\n</html>",
+            "cookie": []
+          }
+        ],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "75ddfe5b-20d2-479c-936b-3647ea2c9fc5",
+              "type": "text/javascript",
+              "exec": [
+                "const wookie = pm.response.json();\r",
+                "\r",
+                "const maKey = pm.variables.get('key');\r",
+                "\r",
+                "\r",
+                "const maFonctionTestStatusCode = () =>  {\r",
+                "    pm.response.to.have.status(200);\r",
+                "}\r",
+                "\r",
+                "pm.test(\"should be status code with 200 \", maFonctionTestStatusCode);\r",
+                "\r",
+                "pm.test('should be wookie not null ', () => {\r",
+                "    pm.expect(wookie).not.be.null;\r",
+                "});\r",
+                "\r",
+                "\r",
+                "const Ajv = require('ajv');\r",
+                "const ajv = new Ajv({ logger: console, allErrors: true });\r",
+                "\r",
+                "const schema = {\r",
+                "    type: \"object\",\r",
+                "    required: [\r",
+                "        \"id\",\r",
+                "        \"size\"\r",
+                "    ],\r",
+                "    properties: {\r",
+                "        id: {\r",
+                "            type: \"number\"\r",
+                "        },\r",
+                "        surname: {\r",
+                "            type: \"string\"\r",
+                "        }\r",
+                "    }\r",
+                "};\r",
+                "\r",
+                "pm.test('should be really a wooky (wookie schema)', () => {\r",
+                "    pm.expect(ajv.validate(schema, wookie)).to.be.true;\r",
+                "\r",
+                "});\r",
+                "\r",
+                "//pm.globals.unset('value');\r",
+                "//pm.collectionVariables.unset('maVariable1');\r",
+                "\r",
+                ""
+              ],
+              "_lastExecutionId": "e8aae20b-1afb-45b4-adc2-83f067cdb054"
+            }
+          },
+          {
+            "listen": "prerequest",
+            "script": {
+              "id": "7bacb7d3-f827-4c54-a26f-bcb404ef8772",
+              "type": "text/javascript",
+              "exec": [
+                "pm.globals.set('key', 12);\r",
+                "pm.globals.set('value', 'test wookie final');\r",
+                "const value = pm.globals.get('value');\r",
+                "\r",
+                "pm.collectionVariables.set('maVariable1', 15);\r",
+                "const valeurVariable = pm.collectionVariables.get('maVariable1');\r",
+                "\r",
+                "pm.environment.set('key', 150);\r",
+                ""
+              ],
+              "_lastExecutionId": "7024dd5a-e47f-4a27-864a-cdf95a86128e"
+            }
+          }
+        ],
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        }
+      },
+      {
+        "id": "f2589532-02f9-49f5-9530-c0458820b73d",
+        "name": "https://trello.com/1/cards",
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "1",
+              "cards"
+            ],
+            "host": [
+              "trello",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "authority",
+              "value": "trello.com"
+            },
+            {
+              "key": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\""
+            },
+            {
+              "key": "x-trello-client-version",
+              "value": "build-6749"
+            },
+            {
+              "key": "x-trello-traceid",
+              "value": "60080855446665de5ad9427e9508235f"
+            },
+            {
+              "key": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "key": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "key": "x-requested-with",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "key": "origin",
+              "value": "https://trello.com"
+            },
+            {
+              "key": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "key": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "key": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "key": "referer",
+              "value": "https://trello.com/b/tmFPM4yC/livres-%C3%A0-lire"
+            },
+            {
+              "key": "accept-language",
+              "value": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "key": "cookie",
+              "value": "_ga=GA1.2.1659817283.1604910157; ajs_group_id=null; ajs_anonymous_id=%22c1ef5501-15b1-4982-aa30-871aaedfa966%22; _gcl_au=1.1.1737630889.1604910158; gdpr-user=true; _mkto_trk=id:594-ATC-127&token:_mch-trello.com-1604910158029-14278; gdpr-cookie-consent=accepted; tss=1; token=5894769d465d91a58b877a65%2F2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm; __cid=a4ef6d89-6054-4de9-afb3-66072e1e13bf-731b701bbdf916f2ff3b3568ff3b35b2ff3b0d; G_ENABLED_IDPS=google; __hstc=183819321.40d01dbb179d848f96cf831309a22fea.1606984271103.1606984271103.1606984271103.1; __hssrc=1; hubspotutk=40d01dbb179d848f96cf831309a22fea; loggedIn=1; lang=fr-FR; dsc=308d9b032aa2bf35af234df3f9544d868e684843092f5041268f96a8a34c680a; _gid=GA1.2.1316817017.1610977996; _sp_ses.dc4d=*; mab=5894769d465d91a58b877a65; _sp_id.dc4d=80954590-9e0c-4a06-80f8-aed57c2a6412.1604910158.198.1611139135.1611070755.9103f1a2-fc5f-43b7-ab79-4734fb8e58d8"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\":\"une nouvelle carte\",\"closed\":false,\"idLabels\":[],\"idMembers\":[],\"dateLastActivity\":1611139157712,\"pos\":65535,\"idBoard\":\"59772655795d32449fdcb7a8\",\"idList\":\"59776a0d49f85c4c0137ca88\",\"token\":\"5894769d465d91a58b877a65/2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm\"}"
+          }
+        },
+        "response": [],
+        "event": []
+      },
+      {
+        "id": "52acd025-2362-498c-9cce-6a654910d5c3",
+        "name": "Test login - with success",
+        "request": {
+          "description": {
+            "content": "Test login user, and getting token from logged success",
+            "type": "text/plain"
+          },
+          "url": {
+            "path": [
+              "authenticate"
+            ],
+            "host": [
+              "{{url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"login\": \"contact@devtobecurious.com\",\r\n    \"password\": \"123456\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "39ebea89-6189-422c-93ed-41002aa5ac81",
+              "type": "text/javascript",
+              "exec": [
+                "const user = pm.response.json();\r",
+                "\r",
+                "pm.test('should be success with login and password set', () => {\r",
+                "    pm.response.to.have.status(200);\r",
+                "\r",
+                "    pm.expect(user).not.to.be.null;\r",
+                "    pm.expect(user.token).not.to.be.null;\r",
+                "    pm.expect(user.token).not.be.eq('');\r",
+                "\r",
+                "    pm.environment.set('token', user.token);\r",
+                "    postman.setNextRequest('Test selfies with bearer token valid - with success');\r",
+                "});"
+              ],
+              "_lastExecutionId": "e72510ca-2de9-4559-b26a-aadeaa171426"
+            }
+          }
+        ]
+      },
+      {
+        "id": "08f3b984-f54e-4e9c-acfe-b71f62acff3c",
+        "name": "Test selfies with bearer token valid - with success",
+        "request": {
+          "url": {
+            "path": [
+              "selfies"
+            ],
+            "host": [
+              "{{url}}"
+            ],
+            "query": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "418dd07d-e2cb-481b-8346-b126d04bc68a",
+              "type": "text/javascript",
+              "exec": [
+                "const selfies = pm.response.json();\r",
+                "\r",
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "\r",
+                " pm.test('should get list of selfies, with success', () => {\r",
+                "     pm.expect(selfies).not.to.be.null;\r",
+                "     pm.expect(selfies).to.be.an('array').that.not.is.empty;\r",
+                "     pm.expect(selfies.length).eq(2);\r",
+                " });\r",
+                "\r",
+                "pm.environment.unset('token');"
+              ],
+              "_lastExecutionId": "6d217bf8-cc2a-48f3-8c26-bd1cd675cc4f"
+            }
+          },
+          {
+            "listen": "prerequest",
+            "script": {
+              "id": "4a41db22-0092-45d9-b483-809ff59dcb9a",
+              "type": "text/javascript",
+              "exec": [
+                "const isTokenSet = pm.variables.has('token');\r",
+                "\r",
+                "if (! isTokenSet) {\r",
+                "    throw new EvalError('token is empty');\r",
+                "}"
+              ],
+              "_lastExecutionId": "9783b616-1971-4fd6-bb6c-089260a96e61"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [
+      {
+        "listen": "prerequest",
+        "script": {
+          "id": "c03ddb9a-03dc-4f3c-915e-549ca39718ad",
+          "type": "text/javascript",
+          "exec": [
+            ""
+          ],
+          "_lastExecutionId": "f697d89d-be17-4cab-8b76-09065632a2c9"
+        }
+      },
+      {
+        "listen": "test",
+        "script": {
+          "id": "ca9e0b83-1913-4179-99f3-f3c59e6e26d0",
+          "type": "text/javascript",
+          "exec": [
+            ""
+          ],
+          "_lastExecutionId": "69cfb2fa-df2b-4668-a91d-d3671eacb678"
+        }
+      }
+    ],
+    "variable": [
+      {
+        "type": "any",
+        "value": "",
+        "key": "maVariable1"
+      }
+    ],
+    "info": {
+      "_postman_id": "61d4bbf7-0a40-4f3d-8852-c13f76190f83",
+      "name": "formation-postman",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment",
+      "postman_exported_at": "2021-01-26T10:43:04.273Z",
+      "postman_exported_using": "Postman/7.36.1"
+    },
+    "id": "10cb2c0e-56d3-44ae-b91a-f0de47e0a08f",
+    "name": "FormationPostMan.001.Dev",
+    "values": [
+      {
+        "type": "any",
+        "value": "",
+        "key": "testKey"
+      },
+      {
+        "type": "any",
+        "value": 150,
+        "key": "key"
+      },
+      {
+        "type": "any",
+        "value": "https://localhost:44353",
+        "key": "url"
+      }
+    ]
+  },
+  "globals": {
+    "id": "014b2a2f-299a-4b87-9111-21f17593a13c",
+    "values": [
+      {
+        "type": "any",
+        "value": 12,
+        "key": "key"
+      },
+      {
+        "type": "any",
+        "value": "test wookie final",
+        "key": "value"
+      }
+    ]
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 13,
+        "pending": 0,
+        "failed": 1
+      },
+      "prerequests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 3,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 7,
+        "pending": 0,
+        "failed": 1
+      },
+      "prerequestScripts": {
+        "total": 6,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 95.75,
+      "responseMin": 5,
+      "responseMax": 322,
+      "responseSd": 131.96850950132006,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1611659908081,
+      "completed": 1611659908612
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 4,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "246f056c-ea54-4599-b042-0332e58091c9",
+          "httpRequestId": "adc50672-b961-4aaa-b5fc-a35ec7c95315"
+        },
+        "item": {
+          "id": "409b1d34-d8ee-49fd-a96a-a904364ce128",
+          "name": "PremierTestRequest",
+          "request": {
+            "url": {
+              "path": [
+                "wookie",
+                ":id"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "value",
+                  "value": "1"
+                },
+                {
+                  "key": "key",
+                  "value": "{{key}}"
+                }
+              ],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "18",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "_": {
+                "postman_previewlanguage": "html"
+              },
+              "id": "6d618b93-ad54-4cc4-a896-41f62fbb00e0",
+              "name": "PremierTestRequest-norun",
+              "originalRequest": {
+                "url": {
+                  "protocol": "http",
+                  "port": "3000",
+                  "path": [
+                    "wookie",
+                    "{{id}}"
+                  ],
+                  "host": [
+                    "localhost"
+                  ],
+                  "query": [
+                    {
+                      "disabled": true,
+                      "key": "value",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'none'"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/html; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "146"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 21 Jan 2021 14:13:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Cannot GET /wookie/</pre>\n    </body>\n</html>",
+              "cookie": []
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "75ddfe5b-20d2-479c-936b-3647ea2c9fc5",
+                "type": "text/javascript",
+                "exec": [
+                  "const wookie = pm.response.json();\r",
+                  "\r",
+                  "const maKey = pm.variables.get('key');\r",
+                  "\r",
+                  "\r",
+                  "const maFonctionTestStatusCode = () =>  {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "}\r",
+                  "\r",
+                  "pm.test(\"should be status code with 200 \", maFonctionTestStatusCode);\r",
+                  "\r",
+                  "pm.test('should be wookie not null ', () => {\r",
+                  "    pm.expect(wookie).not.be.null;\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "const Ajv = require('ajv');\r",
+                  "const ajv = new Ajv({ logger: console, allErrors: true });\r",
+                  "\r",
+                  "const schema = {\r",
+                  "    type: \"object\",\r",
+                  "    required: [\r",
+                  "        \"id\",\r",
+                  "        \"size\"\r",
+                  "    ],\r",
+                  "    properties: {\r",
+                  "        id: {\r",
+                  "            type: \"number\"\r",
+                  "        },\r",
+                  "        surname: {\r",
+                  "            type: \"string\"\r",
+                  "        }\r",
+                  "    }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test('should be really a wooky (wookie schema)', () => {\r",
+                  "    pm.expect(ajv.validate(schema, wookie)).to.be.true;\r",
+                  "\r",
+                  "});\r",
+                  "\r",
+                  "//pm.globals.unset('value');\r",
+                  "//pm.collectionVariables.unset('maVariable1');\r",
+                  "\r",
+                  ""
+                ],
+                "_lastExecutionId": "e8aae20b-1afb-45b4-adc2-83f067cdb054"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "7bacb7d3-f827-4c54-a26f-bcb404ef8772",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('key', 12);\r",
+                  "pm.globals.set('value', 'test wookie final');\r",
+                  "const value = pm.globals.get('value');\r",
+                  "\r",
+                  "pm.collectionVariables.set('maVariable1', 15);\r",
+                  "const valeurVariable = pm.collectionVariables.get('maVariable1');\r",
+                  "\r",
+                  "pm.environment.set('key', 150);\r",
+                  ""
+                ],
+                "_lastExecutionId": "7024dd5a-e47f-4a27-864a-cdf95a86128e"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "port": "44353",
+            "path": [
+              "wookie",
+              "18"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "key",
+                "value": "150"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.26.10",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "01672ed4-5a83-4377-a94c-426f89820ea5",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:44353",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": 61,
+              "system": true
+            }
+          ],
+          "method": "GET",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "f6e77c37-64a8-45f0-a172-9ec1bbfb260b",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Server",
+              "value": "Microsoft-IIS/10.0"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "ASP.NET"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 26 Jan 2021 11:18:28 GMT"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 51,
+          "responseSize": 0
+        },
+        "id": "409b1d34-d8ee-49fd-a96a-a904364ce128",
+        "testScript": [
+          {
+            "error": {
+              "type": "Error",
+              "name": "JSONError",
+              "message": "No data, empty input at 1:1\n\n^",
+              "checksum": "dd12d8ea84467ec693558d8bb4288cb9",
+              "id": "0077f8c7-5349-42eb-9a2c-3c4ed5e381ba",
+              "timestamp": 1611659908192,
+              "stacktrace": []
+            }
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "dafa5069-3c0b-4231-94d3-b567ca71fec3",
+          "length": 4,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "4538c7e4-07e1-4ebf-9b4f-6f775dae9b15"
+        },
+        "item": {
+          "id": "f2589532-02f9-49f5-9530-c0458820b73d",
+          "name": "https://trello.com/1/cards",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "path": [
+                "1",
+                "cards"
+              ],
+              "host": [
+                "trello",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "authority",
+                "value": "trello.com"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\""
+              },
+              {
+                "key": "x-trello-client-version",
+                "value": "build-6749"
+              },
+              {
+                "key": "x-trello-traceid",
+                "value": "60080855446665de5ad9427e9508235f"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "accept",
+                "value": "application/json, text/javascript, */*; q=0.01"
+              },
+              {
+                "key": "x-requested-with",
+                "value": "XMLHttpRequest"
+              },
+              {
+                "key": "origin",
+                "value": "https://trello.com"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "referer",
+                "value": "https://trello.com/b/tmFPM4yC/livres-%C3%A0-lire"
+              },
+              {
+                "key": "accept-language",
+                "value": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"
+              },
+              {
+                "key": "cookie",
+                "value": "_ga=GA1.2.1659817283.1604910157; ajs_group_id=null; ajs_anonymous_id=%22c1ef5501-15b1-4982-aa30-871aaedfa966%22; _gcl_au=1.1.1737630889.1604910158; gdpr-user=true; _mkto_trk=id:594-ATC-127&token:_mch-trello.com-1604910158029-14278; gdpr-cookie-consent=accepted; tss=1; token=5894769d465d91a58b877a65%2F2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm; __cid=a4ef6d89-6054-4de9-afb3-66072e1e13bf-731b701bbdf916f2ff3b3568ff3b35b2ff3b0d; G_ENABLED_IDPS=google; __hstc=183819321.40d01dbb179d848f96cf831309a22fea.1606984271103.1606984271103.1606984271103.1; __hssrc=1; hubspotutk=40d01dbb179d848f96cf831309a22fea; loggedIn=1; lang=fr-FR; dsc=308d9b032aa2bf35af234df3f9544d868e684843092f5041268f96a8a34c680a; _gid=GA1.2.1316817017.1610977996; _sp_ses.dc4d=*; mab=5894769d465d91a58b877a65; _sp_id.dc4d=80954590-9e0c-4a06-80f8-aed57c2a6412.1604910158.198.1611139135.1611070755.9103f1a2-fc5f-43b7-ab79-4734fb8e58d8"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"une nouvelle carte\",\"closed\":false,\"idLabels\":[],\"idMembers\":[],\"dateLastActivity\":1611139157712,\"pos\":65535,\"idBoard\":\"59772655795d32449fdcb7a8\",\"idList\":\"59776a0d49f85c4c0137ca88\",\"token\":\"5894769d465d91a58b877a65/2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm\"}"
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "path": [
+              "1",
+              "cards"
+            ],
+            "host": [
+              "trello",
+              "com"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "authority",
+              "value": "trello.com"
+            },
+            {
+              "key": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\""
+            },
+            {
+              "key": "x-trello-client-version",
+              "value": "build-6749"
+            },
+            {
+              "key": "x-trello-traceid",
+              "value": "60080855446665de5ad9427e9508235f"
+            },
+            {
+              "key": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "key": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json"
+            },
+            {
+              "key": "accept",
+              "value": "application/json, text/javascript, */*; q=0.01"
+            },
+            {
+              "key": "x-requested-with",
+              "value": "XMLHttpRequest"
+            },
+            {
+              "key": "origin",
+              "value": "https://trello.com"
+            },
+            {
+              "key": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "key": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "key": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "key": "referer",
+              "value": "https://trello.com/b/tmFPM4yC/livres-%C3%A0-lire"
+            },
+            {
+              "key": "accept-language",
+              "value": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"
+            },
+            {
+              "key": "cookie",
+              "value": "_ga=GA1.2.1659817283.1604910157; ajs_group_id=null; ajs_anonymous_id=%22c1ef5501-15b1-4982-aa30-871aaedfa966%22; _gcl_au=1.1.1737630889.1604910158; gdpr-user=true; _mkto_trk=id:594-ATC-127&token:_mch-trello.com-1604910158029-14278; gdpr-cookie-consent=accepted; tss=1; token=5894769d465d91a58b877a65%2F2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm; __cid=a4ef6d89-6054-4de9-afb3-66072e1e13bf-731b701bbdf916f2ff3b3568ff3b35b2ff3b0d; G_ENABLED_IDPS=google; __hstc=183819321.40d01dbb179d848f96cf831309a22fea.1606984271103.1606984271103.1606984271103.1; __hssrc=1; hubspotutk=40d01dbb179d848f96cf831309a22fea; loggedIn=1; lang=fr-FR; dsc=308d9b032aa2bf35af234df3f9544d868e684843092f5041268f96a8a34c680a; _gid=GA1.2.1316817017.1610977996; _sp_ses.dc4d=*; mab=5894769d465d91a58b877a65; _sp_id.dc4d=80954590-9e0c-4a06-80f8-aed57c2a6412.1604910158.198.1611139135.1611070755.9103f1a2-fc5f-43b7-ab79-4734fb8e58d8"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "84a5d869-802c-41b7-b7dd-3c0e8638d287",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "trello.com",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": 291,
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\":\"une nouvelle carte\",\"closed\":false,\"idLabels\":[],\"idMembers\":[],\"dateLastActivity\":1611139157712,\"pos\":65535,\"idBoard\":\"59772655795d32449fdcb7a8\",\"idList\":\"59776a0d49f85c4c0137ca88\",\"token\":\"5894769d465d91a58b877a65/2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm\"}"
+          }
+        },
+        "response": {
+          "id": "0dda2540-72e6-49fe-bfbe-e3e955ddc691",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "X-Dns-Prefetch-Control",
+              "value": "off"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "X-Download-Options",
+              "value": "noopen"
+            },
+            {
+              "key": "X-Permitted-Cross-Domain-Policies",
+              "value": "none"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "key": "Surrogate-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, must-revalidate, no-cache, no-store"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "Thu, 01 Jan 1970 00:00:00"
+            },
+            {
+              "key": "X-Trello-Version",
+              "value": "1.2334.0"
+            },
+            {
+              "key": "X-Trello-Environment",
+              "value": "Production"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Allow-Methods",
+              "value": "GET, PUT, POST, DELETE"
+            },
+            {
+              "key": "Access-Control-Allow-Headers",
+              "value": "Authorization, Accept, Content-Type"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "x-rate-limit-api-key-interval-ms, x-rate-limit-api-key-max, x-rate-limit-api-key-remaining, x-rate-limit-api-token-interval-ms, x-rate-limit-api-token-max, x-rate-limit-api-token-remaining"
+            },
+            {
+              "key": "X-Rate-Limit-Member-Interval-Ms",
+              "value": "10000"
+            },
+            {
+              "key": "X-Rate-Limit-Member-Max",
+              "value": "200"
+            },
+            {
+              "key": "X-Rate-Limit-Member-Remaining",
+              "value": "199"
+            },
+            {
+              "key": "X-Server-Time",
+              "value": "1611659909442"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 26 Jan 2021 11:18:29 GMT"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "X-Envoy-Upstream-Service-Time",
+              "value": "244"
+            },
+            {
+              "key": "Expect-Ct",
+              "value": "report-uri=\"https://web-security-reports.services.atlassian.com/expect-ct-report/trello-edge\", max-age=86400"
+            },
+            {
+              "key": "X-Logging-Id",
+              "value": "7a01fdce-4547-49f0-9059-3b05dad7c9ba"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; preload"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Xss-Protection",
+              "value": "1; mode=block"
+            },
+            {
+              "key": "Server",
+              "value": "globaledge-envoy"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              34,
+              54,
+              48,
+              48,
+              102,
+              102,
+              97,
+              56,
+              53,
+              50,
+              52,
+              97,
+              100,
+              99,
+              101,
+              54,
+              51,
+              53,
+              101,
+              97,
+              49,
+              101,
+              98,
+              49,
+              50,
+              34,
+              44,
+              34,
+              99,
+              104,
+              101,
+              99,
+              107,
+              73,
+              116,
+              101,
+              109,
+              83,
+              116,
+              97,
+              116,
+              101,
+              115,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              99,
+              108,
+              111,
+              115,
+              101,
+              100,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              100,
+              97,
+              116,
+              101,
+              76,
+              97,
+              115,
+              116,
+              65,
+              99,
+              116,
+              105,
+              118,
+              105,
+              116,
+              121,
+              34,
+              58,
+              34,
+              50,
+              48,
+              50,
+              49,
+              45,
+              48,
+              49,
+              45,
+              50,
+              54,
+              84,
+              49,
+              49,
+              58,
+              49,
+              56,
+              58,
+              50,
+              57,
+              46,
+              51,
+              55,
+              48,
+              90,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              34,
+              58,
+              34,
+              34,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              68,
+              97,
+              116,
+              97,
+              34,
+              58,
+              123,
+              34,
+              101,
+              109,
+              111,
+              106,
+              105,
+              34,
+              58,
+              123,
+              125,
+              125,
+              44,
+              34,
+              100,
+              117,
+              101,
+              82,
+              101,
+              109,
+              105,
+              110,
+              100,
+              101,
+              114,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              105,
+              100,
+              66,
+              111,
+              97,
+              114,
+              100,
+              34,
+              58,
+              34,
+              53,
+              57,
+              55,
+              55,
+              50,
+              54,
+              53,
+              53,
+              55,
+              57,
+              53,
+              100,
+              51,
+              50,
+              52,
+              52,
+              57,
+              102,
+              100,
+              99,
+              98,
+              55,
+              97,
+              56,
+              34,
+              44,
+              34,
+              105,
+              100,
+              76,
+              105,
+              115,
+              116,
+              34,
+              58,
+              34,
+              53,
+              57,
+              55,
+              55,
+              54,
+              97,
+              48,
+              100,
+              52,
+              57,
+              102,
+              56,
+              53,
+              99,
+              52,
+              99,
+              48,
+              49,
+              51,
+              55,
+              99,
+              97,
+              56,
+              56,
+              34,
+              44,
+              34,
+              105,
+              100,
+              77,
+              101,
+              109,
+              98,
+              101,
+              114,
+              115,
+              86,
+              111,
+              116,
+              101,
+              100,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              105,
+              100,
+              83,
+              104,
+              111,
+              114,
+              116,
+              34,
+              58,
+              55,
+              48,
+              44,
+              34,
+              105,
+              100,
+              65,
+              116,
+              116,
+              97,
+              99,
+              104,
+              109,
+              101,
+              110,
+              116,
+              67,
+              111,
+              118,
+              101,
+              114,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              105,
+              100,
+              76,
+              97,
+              98,
+              101,
+              108,
+              115,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              109,
+              97,
+              110,
+              117,
+              97,
+              108,
+              67,
+              111,
+              118,
+              101,
+              114,
+              65,
+              116,
+              116,
+              97,
+              99,
+              104,
+              109,
+              101,
+              110,
+              116,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              117,
+              110,
+              101,
+              32,
+              110,
+              111,
+              117,
+              118,
+              101,
+              108,
+              108,
+              101,
+              32,
+              99,
+              97,
+              114,
+              116,
+              101,
+              34,
+              44,
+              34,
+              112,
+              111,
+              115,
+              34,
+              58,
+              54,
+              53,
+              53,
+              52,
+              51,
+              44,
+              34,
+              115,
+              104,
+              111,
+              114,
+              116,
+              76,
+              105,
+              110,
+              107,
+              34,
+              58,
+              34,
+              71,
+              79,
+              50,
+              50,
+              83,
+              79,
+              102,
+              118,
+              34,
+              44,
+              34,
+              105,
+              115,
+              84,
+              101,
+              109,
+              112,
+              108,
+              97,
+              116,
+              101,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              99,
+              97,
+              114,
+              100,
+              82,
+              111,
+              108,
+              101,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              100,
+              117,
+              101,
+              67,
+              111,
+              109,
+              112,
+              108,
+              101,
+              116,
+              101,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              100,
+              117,
+              101,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              108,
+              97,
+              98,
+              101,
+              108,
+              115,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              115,
+              104,
+              111,
+              114,
+              116,
+              85,
+              114,
+              108,
+              34,
+              58,
+              34,
+              104,
+              116,
+              116,
+              112,
+              115,
+              58,
+              47,
+              47,
+              116,
+              114,
+              101,
+              108,
+              108,
+              111,
+              46,
+              99,
+              111,
+              109,
+              47,
+              99,
+              47,
+              71,
+              79,
+              50,
+              50,
+              83,
+              79,
+              102,
+              118,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              114,
+              116,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              117,
+              114,
+              108,
+              34,
+              58,
+              34,
+              104,
+              116,
+              116,
+              112,
+              115,
+              58,
+              47,
+              47,
+              116,
+              114,
+              101,
+              108,
+              108,
+              111,
+              46,
+              99,
+              111,
+              109,
+              47,
+              99,
+              47,
+              71,
+              79,
+              50,
+              50,
+              83,
+              79,
+              102,
+              118,
+              47,
+              55,
+              48,
+              45,
+              117,
+              110,
+              101,
+              45,
+              110,
+              111,
+              117,
+              118,
+              101,
+              108,
+              108,
+              101,
+              45,
+              99,
+              97,
+              114,
+              116,
+              101,
+              34,
+              44,
+              34,
+              99,
+              111,
+              118,
+              101,
+              114,
+              34,
+              58,
+              123,
+              34,
+              105,
+              100,
+              65,
+              116,
+              116,
+              97,
+              99,
+              104,
+              109,
+              101,
+              110,
+              116,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              99,
+              111,
+              108,
+              111,
+              114,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              105,
+              100,
+              85,
+              112,
+              108,
+              111,
+              97,
+              100,
+              101,
+              100,
+              66,
+              97,
+              99,
+              107,
+              103,
+              114,
+              111,
+              117,
+              110,
+              100,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              115,
+              105,
+              122,
+              101,
+              34,
+              58,
+              34,
+              110,
+              111,
+              114,
+              109,
+              97,
+              108,
+              34,
+              44,
+              34,
+              98,
+              114,
+              105,
+              103,
+              104,
+              116,
+              110,
+              101,
+              115,
+              115,
+              34,
+              58,
+              34,
+              108,
+              105,
+              103,
+              104,
+              116,
+              34,
+              125,
+              44,
+              34,
+              105,
+              100,
+              77,
+              101,
+              109,
+              98,
+              101,
+              114,
+              115,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              101,
+              109,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              101,
+              118,
+              97,
+              110,
+              98,
+              111,
+              105,
+              115,
+              115,
+              111,
+              110,
+              110,
+              111,
+              43,
+              50,
+              110,
+              111,
+              107,
+              105,
+              54,
+              113,
+              97,
+              53,
+              116,
+              119,
+              104,
+              57,
+              114,
+              114,
+              56,
+              122,
+              49,
+              104,
+              43,
+              50,
+              118,
+              114,
+              106,
+              99,
+              113,
+              108,
+              100,
+              100,
+              120,
+              101,
+              112,
+              48,
+              102,
+              103,
+              50,
+              115,
+              121,
+              97,
+              43,
+              48,
+              99,
+              104,
+              56,
+              102,
+              49,
+              97,
+              50,
+              50,
+              54,
+              64,
+              98,
+              111,
+              97,
+              114,
+              100,
+              115,
+              46,
+              116,
+              114,
+              101,
+              108,
+              108,
+              111,
+              46,
+              99,
+              111,
+              109,
+              34,
+              44,
+              34,
+              97,
+              116,
+              116,
+              97,
+              99,
+              104,
+              109,
+              101,
+              110,
+              116,
+              115,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              98,
+              97,
+              100,
+              103,
+              101,
+              115,
+              34,
+              58,
+              123,
+              34,
+              97,
+              116,
+              116,
+              97,
+              99,
+              104,
+              109,
+              101,
+              110,
+              116,
+              115,
+              66,
+              121,
+              84,
+              121,
+              112,
+              101,
+              34,
+              58,
+              123,
+              34,
+              116,
+              114,
+              101,
+              108,
+              108,
+              111,
+              34,
+              58,
+              123,
+              34,
+              98,
+              111,
+              97,
+              114,
+              100,
+              34,
+              58,
+              48,
+              44,
+              34,
+              99,
+              97,
+              114,
+              100,
+              34,
+              58,
+              48,
+              125,
+              125,
+              44,
+              34,
+              108,
+              111,
+              99,
+              97,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              118,
+              111,
+              116,
+              101,
+              115,
+              34,
+              58,
+              48,
+              44,
+              34,
+              118,
+              105,
+              101,
+              119,
+              105,
+              110,
+              103,
+              77,
+              101,
+              109,
+              98,
+              101,
+              114,
+              86,
+              111,
+              116,
+              101,
+              100,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              115,
+              117,
+              98,
+              115,
+              99,
+              114,
+              105,
+              98,
+              101,
+              100,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              102,
+              111,
+              103,
+              98,
+              117,
+              103,
+              122,
+              34,
+              58,
+              34,
+              34,
+              44,
+              34,
+              99,
+              104,
+              101,
+              99,
+              107,
+              73,
+              116,
+              101,
+              109,
+              115,
+              34,
+              58,
+              48,
+              44,
+              34,
+              99,
+              104,
+              101,
+              99,
+              107,
+              73,
+              116,
+              101,
+              109,
+              115,
+              67,
+              104,
+              101,
+              99,
+              107,
+              101,
+              100,
+              34,
+              58,
+              48,
+              44,
+              34,
+              99,
+              104,
+              101,
+              99,
+              107,
+              73,
+              116,
+              101,
+              109,
+              115,
+              69,
+              97,
+              114,
+              108,
+              105,
+              101,
+              115,
+              116,
+              68,
+              117,
+              101,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              99,
+              111,
+              109,
+              109,
+              101,
+              110,
+              116,
+              115,
+              34,
+              58,
+              48,
+              44,
+              34,
+              97,
+              116,
+              116,
+              97,
+              99,
+              104,
+              109,
+              101,
+              110,
+              116,
+              115,
+              34,
+              58,
+              48,
+              44,
+              34,
+              100,
+              101,
+              115,
+              99,
+              114,
+              105,
+              112,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              100,
+              117,
+              101,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              100,
+              117,
+              101,
+              67,
+              111,
+              109,
+              112,
+              108,
+              101,
+              116,
+              101,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              115,
+              116,
+              97,
+              114,
+              116,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              125,
+              44,
+              34,
+              115,
+              117,
+              98,
+              115,
+              99,
+              114,
+              105,
+              98,
+              101,
+              100,
+              34,
+              58,
+              102,
+              97,
+              108,
+              115,
+              101,
+              44,
+              34,
+              105,
+              100,
+              67,
+              104,
+              101,
+              99,
+              107,
+              108,
+              105,
+              115,
+              116,
+              115,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              115,
+              116,
+              105,
+              99,
+              107,
+              101,
+              114,
+              115,
+              34,
+              58,
+              91,
+              93,
+              44,
+              34,
+              108,
+              105,
+              109,
+              105,
+              116,
+              115,
+              34,
+              58,
+              123,
+              125,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 322,
+          "responseSize": 1204
+        },
+        "id": "f2589532-02f9-49f5-9530-c0458820b73d"
+      },
+      {
+        "cursor": {
+          "ref": "deb4652a-252a-45f8-9bbe-68d48723bdc6",
+          "length": 4,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "b24daa82-11af-4fb9-9834-575c3583c053"
+        },
+        "item": {
+          "id": "52acd025-2362-498c-9cce-6a654910d5c3",
+          "name": "Test login - with success",
+          "request": {
+            "description": {
+              "content": "Test login user, and getting token from logged success",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authenticate"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"login\": \"contact@devtobecurious.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "39ebea89-6189-422c-93ed-41002aa5ac81",
+                "type": "text/javascript",
+                "exec": [
+                  "const user = pm.response.json();\r",
+                  "\r",
+                  "pm.test('should be success with login and password set', () => {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "\r",
+                  "    pm.expect(user).not.to.be.null;\r",
+                  "    pm.expect(user.token).not.to.be.null;\r",
+                  "    pm.expect(user.token).not.be.eq('');\r",
+                  "\r",
+                  "    pm.environment.set('token', user.token);\r",
+                  "    postman.setNextRequest('Test selfies with bearer token valid - with success');\r",
+                  "});"
+                ],
+                "_lastExecutionId": "e72510ca-2de9-4559-b26a-aadeaa171426"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "Test login user, and getting token from logged success",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "https",
+            "port": "44353",
+            "path": [
+              "authenticate"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.26.10",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "ce54f602-0f06-42e2-9cd2-2da115de7259",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:44353",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": 74,
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"login\": \"contact@devtobecurious.com\",\r\n    \"password\": \"123456\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "e79237e9-7dfc-456c-a3a9-c45eaba48191",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Server",
+              "value": "Microsoft-IIS/10.0"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "ASP.NET"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 26 Jan 2021 11:18:28 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "105"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              108,
+              111,
+              103,
+              105,
+              110,
+              34,
+              58,
+              34,
+              99,
+              111,
+              110,
+              116,
+              97,
+              99,
+              116,
+              64,
+              100,
+              101,
+              118,
+              116,
+              111,
+              98,
+              101,
+              99,
+              117,
+              114,
+              105,
+              111,
+              117,
+              115,
+              46,
+              99,
+              111,
+              109,
+              34,
+              44,
+              34,
+              112,
+              97,
+              115,
+              115,
+              119,
+              111,
+              114,
+              100,
+              34,
+              58,
+              34,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              34,
+              44,
+              34,
+              116,
+              111,
+              107,
+              101,
+              110,
+              34,
+              58,
+              34,
+              49,
+              101,
+              99,
+              101,
+              57,
+              48,
+              53,
+              100,
+              45,
+              98,
+              97,
+              98,
+              53,
+              45,
+              52,
+              50,
+              57,
+              99,
+              45,
+              56,
+              50,
+              56,
+              49,
+              45,
+              55,
+              49,
+              50,
+              99,
+              54,
+              49,
+              97,
+              98,
+              97,
+              57,
+              101,
+              97,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 5,
+          "responseSize": 105
+        },
+        "id": "52acd025-2362-498c-9cce-6a654910d5c3",
+        "assertions": [
+          {
+            "assertion": "should be success with login and password set",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "3aecfebd-5661-491c-a417-22a51cfcd368",
+          "length": 4,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "83d40d9b-a3c5-4758-9bb3-4ec7715a49fe"
+        },
+        "item": {
+          "id": "08f3b984-f54e-4e9c-acfe-b71f62acff3c",
+          "name": "Test selfies with bearer token valid - with success",
+          "request": {
+            "url": {
+              "path": [
+                "selfies"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "418dd07d-e2cb-481b-8346-b126d04bc68a",
+                "type": "text/javascript",
+                "exec": [
+                  "const selfies = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  " pm.test('should get list of selfies, with success', () => {\r",
+                  "     pm.expect(selfies).not.to.be.null;\r",
+                  "     pm.expect(selfies).to.be.an('array').that.not.is.empty;\r",
+                  "     pm.expect(selfies.length).eq(2);\r",
+                  " });\r",
+                  "\r",
+                  "pm.environment.unset('token');"
+                ],
+                "_lastExecutionId": "6d217bf8-cc2a-48f3-8c26-bd1cd675cc4f"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "4a41db22-0092-45d9-b483-809ff59dcb9a",
+                "type": "text/javascript",
+                "exec": [
+                  "const isTokenSet = pm.variables.has('token');\r",
+                  "\r",
+                  "if (! isTokenSet) {\r",
+                  "    throw new EvalError('token is empty');\r",
+                  "}"
+                ],
+                "_lastExecutionId": "9783b616-1971-4fd6-bb6c-089260a96e61"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "https",
+            "port": "44353",
+            "path": [
+              "selfies"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "token",
+                "value": "1ece905d-bab5-429c-8281-712c61aba9ea"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.26.10",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "deb24b98-d504-4722-8ffe-c7edcd060261",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:44353",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "8b27fdcb-5c5a-449d-b279-c6a47b79ce29",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Server",
+              "value": "Microsoft-IIS/10.0"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "ASP.NET"
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 26 Jan 2021 11:18:28 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "7"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              91,
+              123,
+              125,
+              44,
+              123,
+              125,
+              93
+            ]
+          },
+          "cookie": [],
+          "responseTime": 5,
+          "responseSize": 7
+        },
+        "id": "08f3b984-f54e-4e9c-acfe-b71f62acff3c",
+        "assertions": [
+          {
+            "assertion": "Status code is 200",
+            "skipped": false
+          },
+          {
+            "assertion": "should get list of selfies, with success",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 1316
+    },
+    "failures": [
+      {
+        "error": {
+          "type": "Error",
+          "name": "JSONError",
+          "message": "No data, empty input at 1:1\n\n^",
+          "checksum": "dd12d8ea84467ec693558d8bb4288cb9",
+          "id": "0077f8c7-5349-42eb-9a2c-3c4ed5e381ba",
+          "timestamp": 1611659908192,
+          "stacktrace": []
+        },
+        "at": "test-script",
+        "source": {
+          "id": "409b1d34-d8ee-49fd-a96a-a904364ce128",
+          "name": "PremierTestRequest",
+          "request": {
+            "url": {
+              "path": [
+                "wookie",
+                ":id"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "value",
+                  "value": "1"
+                },
+                {
+                  "key": "key",
+                  "value": "{{key}}"
+                }
+              ],
+              "variable": [
+                {
+                  "type": "any",
+                  "value": "18",
+                  "key": "id"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "_": {
+                "postman_previewlanguage": "html"
+              },
+              "id": "6d618b93-ad54-4cc4-a896-41f62fbb00e0",
+              "name": "PremierTestRequest-norun",
+              "originalRequest": {
+                "url": {
+                  "protocol": "http",
+                  "port": "3000",
+                  "path": [
+                    "wookie",
+                    "{{id}}"
+                  ],
+                  "host": [
+                    "localhost"
+                  ],
+                  "query": [
+                    {
+                      "disabled": true,
+                      "key": "value",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'none'"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/html; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "146"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 21 Jan 2021 14:13:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Cannot GET /wookie/</pre>\n    </body>\n</html>",
+              "cookie": []
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "75ddfe5b-20d2-479c-936b-3647ea2c9fc5",
+                "type": "text/javascript",
+                "exec": [
+                  "const wookie = pm.response.json();\r",
+                  "\r",
+                  "const maKey = pm.variables.get('key');\r",
+                  "\r",
+                  "\r",
+                  "const maFonctionTestStatusCode = () =>  {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "}\r",
+                  "\r",
+                  "pm.test(\"should be status code with 200 \", maFonctionTestStatusCode);\r",
+                  "\r",
+                  "pm.test('should be wookie not null ', () => {\r",
+                  "    pm.expect(wookie).not.be.null;\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "const Ajv = require('ajv');\r",
+                  "const ajv = new Ajv({ logger: console, allErrors: true });\r",
+                  "\r",
+                  "const schema = {\r",
+                  "    type: \"object\",\r",
+                  "    required: [\r",
+                  "        \"id\",\r",
+                  "        \"size\"\r",
+                  "    ],\r",
+                  "    properties: {\r",
+                  "        id: {\r",
+                  "            type: \"number\"\r",
+                  "        },\r",
+                  "        surname: {\r",
+                  "            type: \"string\"\r",
+                  "        }\r",
+                  "    }\r",
+                  "};\r",
+                  "\r",
+                  "pm.test('should be really a wooky (wookie schema)', () => {\r",
+                  "    pm.expect(ajv.validate(schema, wookie)).to.be.true;\r",
+                  "\r",
+                  "});\r",
+                  "\r",
+                  "//pm.globals.unset('value');\r",
+                  "//pm.collectionVariables.unset('maVariable1');\r",
+                  "\r",
+                  ""
+                ],
+                "_lastExecutionId": "e8aae20b-1afb-45b4-adc2-83f067cdb054"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "7bacb7d3-f827-4c54-a26f-bcb404ef8772",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.globals.set('key', 12);\r",
+                  "pm.globals.set('value', 'test wookie final');\r",
+                  "const value = pm.globals.get('value');\r",
+                  "\r",
+                  "pm.collectionVariables.set('maVariable1', 15);\r",
+                  "const valeurVariable = pm.collectionVariables.get('maVariable1');\r",
+                  "\r",
+                  "pm.environment.set('key', 150);\r",
+                  ""
+                ],
+                "_lastExecutionId": "7024dd5a-e47f-4a27-864a-cdf95a86128e"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        "parent": {
+          "_": {
+            "postman_id": "61d4bbf7-0a40-4f3d-8852-c13f76190f83"
+          },
+          "item": [
+            {
+              "id": "409b1d34-d8ee-49fd-a96a-a904364ce128",
+              "name": "PremierTestRequest",
+              "request": {
+                "url": {
+                  "path": [
+                    "wookie",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "query": [
+                    {
+                      "disabled": true,
+                      "key": "value",
+                      "value": "1"
+                    },
+                    {
+                      "key": "key",
+                      "value": "{{key}}"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "type": "any",
+                      "value": "18",
+                      "key": "id"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": [
+                {
+                  "_": {
+                    "postman_previewlanguage": "html"
+                  },
+                  "id": "6d618b93-ad54-4cc4-a896-41f62fbb00e0",
+                  "name": "PremierTestRequest-norun",
+                  "originalRequest": {
+                    "url": {
+                      "protocol": "http",
+                      "port": "3000",
+                      "path": [
+                        "wookie",
+                        "{{id}}"
+                      ],
+                      "host": [
+                        "localhost"
+                      ],
+                      "query": [
+                        {
+                          "disabled": true,
+                          "key": "value",
+                          "value": "1"
+                        }
+                      ],
+                      "variable": []
+                    },
+                    "method": "GET",
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"id\": 0,\r\n    \"surname\": \"Chewie\",\r\n    \"size\": 270\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Security-Policy",
+                      "value": "default-src 'none'"
+                    },
+                    {
+                      "key": "X-Content-Type-Options",
+                      "value": "nosniff"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "text/html; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "146"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 21 Jan 2021 14:13:43 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error</title>\n    </head>\n    <body>\n        <pre>Cannot GET /wookie/</pre>\n    </body>\n</html>",
+                  "cookie": []
+                }
+              ],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "75ddfe5b-20d2-479c-936b-3647ea2c9fc5",
+                    "type": "text/javascript",
+                    "exec": [
+                      "const wookie = pm.response.json();\r",
+                      "\r",
+                      "const maKey = pm.variables.get('key');\r",
+                      "\r",
+                      "\r",
+                      "const maFonctionTestStatusCode = () =>  {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "}\r",
+                      "\r",
+                      "pm.test(\"should be status code with 200 \", maFonctionTestStatusCode);\r",
+                      "\r",
+                      "pm.test('should be wookie not null ', () => {\r",
+                      "    pm.expect(wookie).not.be.null;\r",
+                      "});\r",
+                      "\r",
+                      "\r",
+                      "const Ajv = require('ajv');\r",
+                      "const ajv = new Ajv({ logger: console, allErrors: true });\r",
+                      "\r",
+                      "const schema = {\r",
+                      "    type: \"object\",\r",
+                      "    required: [\r",
+                      "        \"id\",\r",
+                      "        \"size\"\r",
+                      "    ],\r",
+                      "    properties: {\r",
+                      "        id: {\r",
+                      "            type: \"number\"\r",
+                      "        },\r",
+                      "        surname: {\r",
+                      "            type: \"string\"\r",
+                      "        }\r",
+                      "    }\r",
+                      "};\r",
+                      "\r",
+                      "pm.test('should be really a wooky (wookie schema)', () => {\r",
+                      "    pm.expect(ajv.validate(schema, wookie)).to.be.true;\r",
+                      "\r",
+                      "});\r",
+                      "\r",
+                      "//pm.globals.unset('value');\r",
+                      "//pm.collectionVariables.unset('maVariable1');\r",
+                      "\r",
+                      ""
+                    ],
+                    "_lastExecutionId": "e8aae20b-1afb-45b4-adc2-83f067cdb054"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "7bacb7d3-f827-4c54-a26f-bcb404ef8772",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.globals.set('key', 12);\r",
+                      "pm.globals.set('value', 'test wookie final');\r",
+                      "const value = pm.globals.get('value');\r",
+                      "\r",
+                      "pm.collectionVariables.set('maVariable1', 15);\r",
+                      "const valeurVariable = pm.collectionVariables.get('maVariable1');\r",
+                      "\r",
+                      "pm.environment.set('key', 150);\r",
+                      ""
+                    ],
+                    "_lastExecutionId": "7024dd5a-e47f-4a27-864a-cdf95a86128e"
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              }
+            },
+            {
+              "id": "f2589532-02f9-49f5-9530-c0458820b73d",
+              "name": "https://trello.com/1/cards",
+              "request": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "1",
+                    "cards"
+                  ],
+                  "host": [
+                    "trello",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "authority",
+                    "value": "trello.com"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\""
+                  },
+                  {
+                    "key": "x-trello-client-version",
+                    "value": "build-6749"
+                  },
+                  {
+                    "key": "x-trello-traceid",
+                    "value": "60080855446665de5ad9427e9508235f"
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/javascript, */*; q=0.01"
+                  },
+                  {
+                    "key": "x-requested-with",
+                    "value": "XMLHttpRequest"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://trello.com"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://trello.com/b/tmFPM4yC/livres-%C3%A0-lire"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"
+                  },
+                  {
+                    "key": "cookie",
+                    "value": "_ga=GA1.2.1659817283.1604910157; ajs_group_id=null; ajs_anonymous_id=%22c1ef5501-15b1-4982-aa30-871aaedfa966%22; _gcl_au=1.1.1737630889.1604910158; gdpr-user=true; _mkto_trk=id:594-ATC-127&token:_mch-trello.com-1604910158029-14278; gdpr-cookie-consent=accepted; tss=1; token=5894769d465d91a58b877a65%2F2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm; __cid=a4ef6d89-6054-4de9-afb3-66072e1e13bf-731b701bbdf916f2ff3b3568ff3b35b2ff3b0d; G_ENABLED_IDPS=google; __hstc=183819321.40d01dbb179d848f96cf831309a22fea.1606984271103.1606984271103.1606984271103.1; __hssrc=1; hubspotutk=40d01dbb179d848f96cf831309a22fea; loggedIn=1; lang=fr-FR; dsc=308d9b032aa2bf35af234df3f9544d868e684843092f5041268f96a8a34c680a; _gid=GA1.2.1316817017.1610977996; _sp_ses.dc4d=*; mab=5894769d465d91a58b877a65; _sp_id.dc4d=80954590-9e0c-4a06-80f8-aed57c2a6412.1604910158.198.1611139135.1611070755.9103f1a2-fc5f-43b7-ab79-4734fb8e58d8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"name\":\"une nouvelle carte\",\"closed\":false,\"idLabels\":[],\"idMembers\":[],\"dateLastActivity\":1611139157712,\"pos\":65535,\"idBoard\":\"59772655795d32449fdcb7a8\",\"idList\":\"59776a0d49f85c4c0137ca88\",\"token\":\"5894769d465d91a58b877a65/2QAbtVPEzXn9m9GZeSNfG5pMCBL9mgUvY2ZbpQJqhTqpiYqWhRMK47u6qTcdewIm\"}"
+                }
+              },
+              "response": [],
+              "event": []
+            },
+            {
+              "id": "52acd025-2362-498c-9cce-6a654910d5c3",
+              "name": "Test login - with success",
+              "request": {
+                "description": {
+                  "content": "Test login user, and getting token from logged success",
+                  "type": "text/plain"
+                },
+                "url": {
+                  "path": [
+                    "authenticate"
+                  ],
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"login\": \"contact@devtobecurious.com\",\r\n    \"password\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "39ebea89-6189-422c-93ed-41002aa5ac81",
+                    "type": "text/javascript",
+                    "exec": [
+                      "const user = pm.response.json();\r",
+                      "\r",
+                      "pm.test('should be success with login and password set', () => {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "\r",
+                      "    pm.expect(user).not.to.be.null;\r",
+                      "    pm.expect(user.token).not.to.be.null;\r",
+                      "    pm.expect(user.token).not.be.eq('');\r",
+                      "\r",
+                      "    pm.environment.set('token', user.token);\r",
+                      "    postman.setNextRequest('Test selfies with bearer token valid - with success');\r",
+                      "});"
+                    ],
+                    "_lastExecutionId": "e72510ca-2de9-4559-b26a-aadeaa171426"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "08f3b984-f54e-4e9c-acfe-b71f62acff3c",
+              "name": "Test selfies with bearer token valid - with success",
+              "request": {
+                "url": {
+                  "path": [
+                    "selfies"
+                  ],
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET"
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "418dd07d-e2cb-481b-8346-b126d04bc68a",
+                    "type": "text/javascript",
+                    "exec": [
+                      "const selfies = pm.response.json();\r",
+                      "\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      " pm.test('should get list of selfies, with success', () => {\r",
+                      "     pm.expect(selfies).not.to.be.null;\r",
+                      "     pm.expect(selfies).to.be.an('array').that.not.is.empty;\r",
+                      "     pm.expect(selfies.length).eq(2);\r",
+                      " });\r",
+                      "\r",
+                      "pm.environment.unset('token');"
+                    ],
+                    "_lastExecutionId": "6d217bf8-cc2a-48f3-8c26-bd1cd675cc4f"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "4a41db22-0092-45d9-b483-809ff59dcb9a",
+                    "type": "text/javascript",
+                    "exec": [
+                      "const isTokenSet = pm.variables.has('token');\r",
+                      "\r",
+                      "if (! isTokenSet) {\r",
+                      "    throw new EvalError('token is empty');\r",
+                      "}"
+                    ],
+                    "_lastExecutionId": "9783b616-1971-4fd6-bb6c-089260a96e61"
+                  }
+                }
+              ]
+            }
+          ],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "c03ddb9a-03dc-4f3c-915e-549ca39718ad",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ],
+                "_lastExecutionId": "f697d89d-be17-4cab-8b76-09065632a2c9"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "ca9e0b83-1913-4179-99f3-f3c59e6e26d0",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ],
+                "_lastExecutionId": "69cfb2fa-df2b-4668-a91d-d3671eacb678"
+              }
+            }
+          ],
+          "variable": [
+            {
+              "type": "any",
+              "value": "",
+              "key": "maVariable1"
+            }
+          ],
+          "info": {
+            "_postman_id": "61d4bbf7-0a40-4f3d-8852-c13f76190f83",
+            "name": "formation-postman",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          }
+        },
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 4,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "246f056c-ea54-4599-b042-0332e58091c9",
+          "httpRequestId": "adc50672-b961-4aaa-b5fc-a35ec7c95315",
+          "scriptId": "75ddfe5b-20d2-479c-936b-3647ea2c9fc5"
+        }
+      }
+    ],
+    "error": null
+  }
+}

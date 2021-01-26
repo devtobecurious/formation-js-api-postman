@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "bXlcOExqOfY6JYIkYoT9K+RNjlbkR48UP8mGm1T0JNsNHdXbk/p+p2V4iT5kYh+3bDQTz4i7pE727HL6jnKUsA==",
+  "success": true,
+  "projectFilePath": "E:\\Works\\Formations\\Udemy\\javascripts\\js et postman\\assets\\api\\fake-002\\Api.We.Tests.001\\Api.We.Tests.001\\Api.We.Tests.001.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\evan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\evan\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\evan\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\evan\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\evan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\evan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

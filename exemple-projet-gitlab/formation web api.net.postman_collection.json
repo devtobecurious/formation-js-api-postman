@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "a5504b91-41b7-4a85-b19d-7c99d96581e6",
+		"name": "formation web api.net",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth with jwt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\": \"1234@test.com\",\n\t\"password\": \"youpi\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:58843/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58843",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "with bearer auth jwt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzI2OTU1ODIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTg4NDMvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1ODg0My8ifQ.6w6F0ow93v-moauBMQwMfwORD0iT2zbPbQ6YlMv20DY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:58843/wookie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58843",
+					"path": [
+						"wookie"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "testvar",
+			"value": "12"
+		}
+	]
+}

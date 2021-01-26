@@ -1,0 +1,24 @@
+stages: 
+  build 
+  staging
+  production
+
+build:test-api:
+  stage: build
+  image: node:latest
+  script: 
+    - npm i -g newman
+    - npm run test
+  cache:
+    paths: 
+      - ./node_modules
+
+staging:test-api:
+  stage: staging
+  image: node:latest
+  script: 
+    - npm i -g newman
+    - npm run test:staging
+  cache:
+    paths: 
+      - ./node_modules
