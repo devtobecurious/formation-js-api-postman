@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "newman run formation-postman.postman_collection.json -e FormationPostMan.001.Dev.postman_environment.json -k -r cli,json,junit",
+    "test": "newman run formation-postman.postman_collection.json -e FormationPostMan.001.Dev.postman_environment.json -k -r cli,json,junit -d data-test.json",
     "test:staging": "newman run formation-postman.postman_collection.json -e FormationPostMan.001.Staging.postman_environment.json -k -r cli,json,junit"
   },
   "keywords": [],

@@ -1,0 +1,4 @@
+email, password, expected
+123@123.com, 123456, ok
+, 123456,nok
+123@123.com,,nok

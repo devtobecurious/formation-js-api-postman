@@ -1,0 +1,17 @@
+[
+    {
+        "email": "123@123.com",
+        "password": "12345",
+        "expected": "ok"
+    },
+    {
+        "email": "",
+        "password": "12345",
+        "expected": "nok"
+    },
+    {
+        "email": "123@123.com",
+        "password": "",
+        "expected": "nok"
+    }
+]
